@@ -2,10 +2,12 @@ import Row from './Row'
 import requests from './requests'
 import Banner from './Banner'
 import styled from 'styled-components';
+import NavBar from './NavBar';
 
 function App() {
   return (
     <div>
+      <NavBar />
       <BannerItem />
       <Row title="Netflix Originals" largeRow fetchUrl={requests.NeflixOriginals}/>
       <Row title="Top Rated" fetchUrl={requests.Trending}/>
@@ -23,6 +25,6 @@ function App() {
 export default App;
 
 const BannerItem = styled(Banner)`
-    height: 500px;
+    height: 450px;
     object-fit: contain;
 `
