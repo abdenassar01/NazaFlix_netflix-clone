@@ -18,16 +18,20 @@ const Row = (props) => {
         fetchMoviesAsync_();
     },[props.fetchUrl]);
     return (
-        <div>
-            <h2>{props.title}</h2>
+        <RowWrapper>
+            <h2 style={{fontSize: "1.5rem" }}>{props.title}</h2>
             <PosterWrapper>
                 {movies.map( movie => <Poster largeRow={props.largeRow} key={movie.id} src={props.largeRow ? `${baseUrl}${movie.poster_path}` : `${baseUrl}${movie.backdrop_path}`}/>)}
             </PosterWrapper>
-        </div>
+        </RowWrapper>
     )
 }
 
 export default Row
+
+const RowWrapper = styled.div`
+    padding-top: 10px;
+`
 
 const PosterWrapper = styled.div`
     display: flex;

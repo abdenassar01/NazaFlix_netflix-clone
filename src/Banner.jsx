@@ -9,35 +9,26 @@ const Banner = () => {
 
     useEffect( () => {
         const fetchMovieAsync_ = async () => {
-            const result = await instance.get(requests.RomanceMovie);
+            const result = await instance.get(requests.NeflixOriginals);
             setMovie(result.data.results[Math.floor(Math.random() * ( result.data.results.length + 0 + 1) ) + 0]); 
             console.log(movie)          
             return result;
         }
         fetchMovieAsync_();
     },[])
-     const baseUrl = "https://image.tmdb.org/t/p/original";
+    const baseUrl = "https://image.tmdb.org/t/p/original";
      
-
-     function truncateString(str, num) {
-        if (str.length > num) {
-          return str.slice(0, num) + "...";
-        } else {
-          return str;
-        }
-      }
-
-
     return (
         <BannerWrapper backgroundImage={`${baseUrl}${movie.backdrop_path}`}>
             <BannerContent>
                 <MovieTitle>{movie?.title || movie?.name || movie?.original_name}</MovieTitle>
                 <ButtonsWrapper>
                     <BannerButton>Play</BannerButton>
-                    <BannerButton>Discover More</BannerButton>
+                    <BannerButton>My List</BannerButton>
                 </ButtonsWrapper>
-                <Discription>{movie?.overview}</Discription>
+                <Discription>{ movie?.overview }</Discription>
             </BannerContent>
+            <FadeButtom />
         </BannerWrapper>
     )
 }
@@ -49,18 +40,33 @@ const BannerWrapper = styled.div`
     background-image: url(${ props => props.backgroundImage});
     background-position: center; 
     color: white;
-
 `
 
 const BannerContent = styled.div`
     margin-left: 30px;
     padding-top: 148px;
-    padding-bottom: 100px;
     height: 200px;
 `
 
 const BannerButton = styled.button`
-    
+     cursor: pointer;
+     color: #fff;
+     outline: none;
+     border: none;
+     font-weight: 700;
+     border-radius: 0.2vw;
+     padding-left: 2rem;
+     padding-right: 2rem;
+     margin-right: 1rem;
+     padding-top: 0.5rem;
+     background-color: rgba(51, 51, 51, 0.5);
+     padding-bottom: 0.5rem;
+
+     &:hover{
+         color: black;
+         background-color: #e6e6e6;
+         transition : all 0.2s;
+     }
 `
 
 const MovieTitle = styled.h1`
@@ -77,5 +83,14 @@ const Discription = styled.p`
     padding-top: 1rem;
     font-size: 0.8rem;
     max-width: 360px;
-    height: 800px;
+    height: 800px; 
+`
+const FadeButtom = styled.div`
+    height: 7.4rem;
+    background-image: linear-gradient(
+        180deg,
+        transparent,
+        rgba(37, 37, 37, 0.61),
+        #111
+    );
 `
